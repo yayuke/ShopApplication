@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#CCCC00"
+    android:layout_height="match_parent"
+    tools:context=".activity.ShopDetailActivity">
+    <include layout="@layout/title_bar_layout"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:orientation="vertical"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="50dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="菜单"
+            android:textColor="#000"
+            android:textSize="20dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginLeft="15dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="5dp"
+            android:background="#ccc"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/rv_food"/>
+    </LinearLayout>
+    <include layout="@layout/shop_title_layout"/>
+    <include layout="@layout/cart_list_layout"/>
+    <include layout="@layout/cart_shop_layout"/>
+</FrameLayout>

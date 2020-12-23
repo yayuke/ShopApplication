@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="15dp"
+        android:padding="5dp"
+        android:background="@drawable/shop_title_bg"
+        android:layout_marginRight="15dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_shop_name"
+            android:text="蛋糕房"
+            android:padding="5dp"
+            android:textColor="#000"
+            android:textSize="18sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_deliver_time"
+            android:text="配送约2-5个小时"            android:padding="5dp"
+
+
+            android:drawableLeft="@drawable/time_icon"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_notice"
+            android:padding="5dp"
+
+            android:text="公告:xxxxxxxxx"
+            />
+    </LinearLayout>
+<!--    圆形图片-->
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/iv_shop_loge"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="40dp"/>
+<!--    <ImageView-->
+<!--        android:layout_width="50dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:id="@+id/iv_shop_loge"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:layout_marginRight="40dp"/>-->
+</RelativeLayout>

@@ -1,0 +1,23 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+<!--    定义活动布局样式-->
+    <style name="activity_dialog_style" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/img_yuan</item>
+<!--        设置背景透明-->
+        <item name="android:windowIsTranslucent">true</item>
+<!--        设置半透明遮罩-->
+        <item name="android:backgroundDimEnabled">true</item>
+<!--        内容背景-->
+        <item name="android:windowContentOverlay">@null</item>
+<!--        点击其他区域关闭窗口-->
+        <item name="android:windowCloseOnTouchOutside">true</item>
+<!--        浮动与其他活动之上-->
+        <item name="android:windowIsFloating">true</item>
+    </style>
+</resources>
