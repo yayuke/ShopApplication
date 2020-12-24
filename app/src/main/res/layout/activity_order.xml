@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="#eee"
     tools:context=".activity.OrderActivity">
-
     <include
         android:id="@+id/include"
         layout="@layout/title_bar_layout"
