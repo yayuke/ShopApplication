@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -62,10 +63,15 @@ public class OrderActivity extends AppCompatActivity {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(OrderActivity.this);
-                builder.setView(R.layout.dialog_layout);
-                AlertDialog alertDialog = builder.create();
-                alertDialog.show();
+                int length = editText.getText().toString().length();
+                if (length==0){
+                    Toast.makeText(OrderActivity.this, "请填写地址", Toast.LENGTH_SHORT).show();
+                }else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(OrderActivity.this);
+                    builder.setView(R.layout.dialog_layout);
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                }
             }
         });
         float sumMoney=0;
