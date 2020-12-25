@@ -51,32 +51,32 @@ public class ShopDetailActivity extends AppCompatActivity {
     private RecyclerView rvCart;
     private TextView tvClear;
     private TextView tvCartNumber;
-//    购物车的商品列表(没有商品的购物车对象)
-    private List<Food> cartList=new ArrayList<>() ;
-/**
- * 添加购物车1
- * 清空购物车2
- * +        3
- * -        4
- * **/
-    public Handler handler=new Handler(Looper.myLooper()){
+    //    购物车的商品列表(没有商品的购物车对象)
+    private List<Food> cartList = new ArrayList<>();
+    /**
+     * 添加购物车1
+     * 清空购物车2
+     * +        3
+     * -        4
+     **/
+    public Handler handler = new Handler(Looper.myLooper()) {
         @Override
         public void handleMessage(@NonNull Message msg) {
-            switch (msg.what){
+            switch (msg.what) {
                 case 1:
                     Food obj = (Food) msg.obj;
 //                    判断是否有商品,如果有增加数量,如果没有就将数量设置为1
-                    boolean isIncart=false;
-                    for (Food f:cartList){
-                        if (f.getFoodName().equals(obj.getFoodName())){
+                    boolean isIncart = false;
+                    for (Food f : cartList) {
+                        if (f.getFoodName().equals(obj.getFoodName())) {
 //                            int num=f.getCount();
 //                            num++;
-                            f.setCount(f.getCount()+1);
-                            isIncart=true;
+                            f.setCount(f.getCount() + 1);
+                            isIncart = true;
                             break;
                         }
                     }
-                    if (!isIncart){
+                    if (!isIncart) {
                         obj.setCount(1);
                         cartList.add(obj);
                     }
@@ -85,20 +85,20 @@ public class ShopDetailActivity extends AppCompatActivity {
                     break;
                 case 3:
                     Food obj3 = (Food) msg.obj;
-                    for (Food f:cartList){
-                        if (f.getFoodName().equals(obj3.getFoodName())){
-                            f.setCount(f.getCount()+1);
+                    for (Food f : cartList) {
+                        if (f.getFoodName().equals(obj3.getFoodName())) {
+                            f.setCount(f.getCount() + 1);
                         }
                     }
                     break;
                 case 4:
                     Food obj4 = (Food) msg.obj;
-                    for (Food f:cartList){
-                        if (f.getFoodName().equals(obj4.getFoodName())){
-                            if (f.getCount()>1){
-                                int num4=f.getCount()-1;
+                    for (Food f : cartList) {
+                        if (f.getFoodName().equals(obj4.getFoodName())) {
+                            if (f.getCount() > 1) {
+                                int num4 = f.getCount() - 1;
                                 f.setCount(num4);
-                            }else {
+                            } else {
                                 cartList.remove(f);
                                 break;
                             }
@@ -114,7 +114,7 @@ public class ShopDetailActivity extends AppCompatActivity {
     private CartAdapter cartAdapter;
 
     //    更新购物车显示的业务逻辑
-    public void updateCart(){
+    public void updateCart() {
 //        购物车为空
         /**
          * 1.显示空购物车图片
@@ -124,7 +124,7 @@ public class ShopDetailActivity extends AppCompatActivity {
          * 5.显示还差多少起送
          * 6.隐藏购物车列表
          * */
-        if (cartList.size()==0){
+        if (cartList.size() == 0) {
 //            显示空购物车图标
             ivCartPic.setImageResource(R.drawable.shop_car_empty);
 //            不显示角标
@@ -134,11 +134,11 @@ public class ShopDetailActivity extends AppCompatActivity {
 //            不显示另需配送费
             tvDelivery.setVisibility(View.GONE);
 //            还差多钱起送
-            tvDeliveryFee.setText("还差"+shop.getOfferPrice()+"起送");
+            tvDeliveryFee.setText("还差" + shop.getOfferPrice() + "起送");
             tvDeliveryFee.setBackgroundColor(0xff454547);
 //            隐藏购物车列表
             rlCartList.setVisibility(View.GONE);
-        }else {//购物车有商品
+        } else {//购物车有商品
             /**
              * 1.显示有色购物车图片
              * 2.显示商品总数
@@ -150,39 +150,40 @@ public class ShopDetailActivity extends AppCompatActivity {
 //            rlCartList.setVisibility(View.VISIBLE);
             ivCartPic.setImageResource(R.drawable.shop_car);
 //            设置角标
-            tvCartNumber.setText(calAllNum()+"");
+            tvCartNumber.setText(calAllNum() + "");
             tvCartNumber.setVisibility(View.VISIBLE);
 //            设置金额
-            tvMoney.setText(String.format("%.2f",calAllMoney())+"￥");
+            tvMoney.setText(String.format("%.2f", calAllMoney()) + "￥");
 //            显示另需配送费xx
             tvDelivery.setVisibility(View.VISIBLE);
-            tvDelivery.setText("另需配送费￥"+shop.getDistributionCost());
+            tvDelivery.setText("另需配送费￥" + shop.getDistributionCost());
 //            判断购物车金额是否超过起送金额
-            if (calAllMoney()>shop.getOfferPrice()){
+            if (calAllMoney() > shop.getOfferPrice()) {
                 tvDeliveryFee.setBackgroundColor(Color.RED);
                 tvDeliveryFee.setText("去结算");
-            }else {
+            } else {
                 tvDeliveryFee.setBackgroundColor(0xff454547);
-                float dis=shop.getOfferPrice()-calAllMoney();
-                tvDeliveryFee.setText("还差"+String.format("%.2f",dis)+"￥起送");
+                float dis = shop.getOfferPrice() - calAllMoney();
+                tvDeliveryFee.setText("还差" + String.format("%.2f", dis) + "￥起送");
             }
         }
         cartAdapter.notifyDataSetChanged();
     }
 
-//    计算总数
-    private int calAllNum(){
-        int sum=0;
-        for (Food f:cartList){
-            sum+=f.getCount();
+    //    计算总数
+    private int calAllNum() {
+        int sum = 0;
+        for (Food f : cartList) {
+            sum += f.getCount();
         }
         return sum;
     }
-//    计算总价
-    private float calAllMoney(){
-        float sumMoney=0;
-        for (Food f:cartList){
-            sumMoney+=f.getCount()*f.getPrice();
+
+    //    计算总价
+    private float calAllMoney() {
+        float sumMoney = 0;
+        for (Food f : cartList) {
+            sumMoney += f.getCount() * f.getPrice();
         }
         return sumMoney;
     }
@@ -253,24 +254,24 @@ public class ShopDetailActivity extends AppCompatActivity {
         ivCartPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (calAllNum()>0){
-                    if (rlCartList.getVisibility()==View.GONE){
+                if (calAllNum() > 0) {
+                    if (rlCartList.getVisibility() == View.GONE) {
                         rlCartList.setVisibility(View.VISIBLE);
-                    }else {
+                    } else {
                         rlCartList.setVisibility(View.GONE);
                     }
                 }
 
-    }
-});
+            }
+        });
 //        清空购物车
         tvClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog dialog;
                 AlertDialog.Builder builder = new AlertDialog.Builder(ShopDetailActivity.this)
-                .setTitle("确认清空购物车")
-                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        .setTitle("确认清空购物车")
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 cartList.clear();
@@ -283,27 +284,29 @@ public class ShopDetailActivity extends AppCompatActivity {
                                 dialog.dismiss();
                             }
                         });
-                 dialog = builder.create();
-                 dialog.show();
+                dialog = builder.create();
+                dialog.show();
             }
         });
 //        结算
         tvDeliveryFee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (calAllMoney()>0){
+                if (calAllMoney() - shop.getOfferPrice() > 0) {
                     Intent intent = new Intent(ShopDetailActivity.this, OrderActivity.class);
                     intent.putExtra("cartList", (Serializable) cartList);
                     intent.putExtra("shop", shop);
                     startActivity(intent);
-            }
+                } else {
+                    Toast.makeText(ShopDetailActivity.this, "还差" + String.format("%.2f", shop.getOfferPrice() - calAllMoney()) + "起送", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 //        点击任意地方收回列表
         rlCartList.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (rlCartList.getVisibility()==View.VISIBLE){
+                if (rlCartList.getVisibility() == View.VISIBLE) {
                     rlCartList.setVisibility(View.GONE);
                 }
                 return false;
